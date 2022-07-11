@@ -42,6 +42,7 @@ namespace webAPI.NET.Controllers
         // POST api/veiculos
         public void Post([FromBody] string value)
         {
+
         }
 
         // PUT api/veiculos/5
@@ -49,9 +50,14 @@ namespace webAPI.NET.Controllers
         {
         }
 
-        // DELETE api/veiculos/5
-        public void Delete(int id)
+        [HttpGet]
+        [Route("api/veiculos/excluir/{id}")]
+        // EXCLUIR api/veiculos/5
+        public string Excluir(int id)
         {
+            var veiculo = listaVeiculos.Single(x => x.Id.Equals(id));
+            listaVeiculos.Remove(veiculo);
+            return "OK";
         }
     }
 }
