@@ -13,6 +13,8 @@ namespace webAPI.NET.Controllers
     {
         public static List<Veiculos> listaVeiculos = new List<Veiculos>();
 
+        [HttpGet]
+        [Route("api/veiculos/popular")]
         public string Popular()
         {
             listaVeiculos.Add(new Veiculos(1, "FORD FIESTA", "1.0 MPI PERSONNALITÉ SEDAN 4P", 2005, 2005, "PRETO", 2, false, 25000, true));
@@ -23,10 +25,6 @@ namespace webAPI.NET.Controllers
             
             return "populado";
         }
-
-
-
-
 
 
         // GET api/veiculos

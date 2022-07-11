@@ -10,6 +10,7 @@ namespace webAPI.NET
         public static void Register(HttpConfiguration config)
         {
             // Serviços e configuração da API da Web
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
 
             // Rotas da API da Web
             config.MapHttpAttributeRoutes();
