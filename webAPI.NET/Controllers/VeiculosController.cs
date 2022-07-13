@@ -49,8 +49,18 @@ namespace webAPI.NET.Controllers
         }
 
         // PUT api/veiculos/5
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Veiculos veiculo)
         {
+            var identificador = listaVeiculos.Single(x => x.Id.Equals(id));
+
+            identificador.Marca = veiculo.Marca;
+            identificador.Modelo = veiculo.Modelo;
+            identificador.Ano = veiculo.Ano;
+            identificador.Fabricacao = veiculo.Fabricacao;
+            identificador.Cor = veiculo.Cor;
+            identificador.Combustivel = veiculo.Combustivel;
+            identificador.Valor = veiculo.Valor;
+            identificador.Ativo = veiculo.Ativo;
         }
 
         [HttpGet]
