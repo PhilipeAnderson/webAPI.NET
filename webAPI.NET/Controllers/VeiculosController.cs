@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,27 +23,29 @@ namespace webAPI.NET.Controllers
             listaVeiculos.Add(new Veiculos(6, "HYUNDAI HB20", "1.0 CONFORT 12V FLEX 4P", 2017, 2017, "AZUL", 3, true, 43000, true));
             listaVeiculos.Add(new Veiculos(12, "CHEVROLET PRISMA", "1.4 MMPI LT 8V FLEX 4P", 2013, 2012, "PRATA", 3, true, 31000, true));
             listaVeiculos.Add(new Veiculos(27, "VOLKSWAGEN POLO", "1.0 200 TSI HIGHLINE", 2018, 2018, "AZUL", 3, true, 66045, true));
-            
+
+            //var resultado = JObject.Parse("{resultado: \"populado\" }");
+            //return (JObject)"resultado";
             return "populado";
         }
 
 
         // GET api/veiculos
-        public string Get()
+        public List<Veiculos> Get()
         {
-            return JsonConvert.SerializeObject(listaVeiculos);
+            return listaVeiculos;
         }
 
         // GET api/veiculos/5
-        public string Get(int id)
+        public Veiculos Get(int id)
         {
-            return JsonConvert.SerializeObject(listaVeiculos.Find(x => x.Id.Equals(id)));
+            return listaVeiculos.Find(x => x.Id.Equals(id));
         }
 
         // POST api/veiculos
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Veiculos veiculo)
         {
-
+            listaVeiculos.Add(new Veiculos(veiculo.Id, veiculo.Marca, veiculo.Modelo, veiculo.Ano, veiculo.Fabricacao, veiculo.Cor, veiculo.Combustivel, veiculo.Automatico, veiculo.Valor, veiculo.Ativo));
         }
 
         // PUT api/veiculos/5
@@ -53,11 +56,12 @@ namespace webAPI.NET.Controllers
         [HttpGet]
         [Route("api/veiculos/excluir/{id}")]
         // EXCLUIR api/veiculos/5
-        public string Excluir(int id)
+        public JObject Excluir(int id)
         {
             var veiculo = listaVeiculos.Single(x => x.Id.Equals(id));
             listaVeiculos.Remove(veiculo);
-            return "OK";
+            var resultado = JObject.Parse("{resultado: \"ok\" }");
+            return (JObject)"resultado";
         }
     }
 }
