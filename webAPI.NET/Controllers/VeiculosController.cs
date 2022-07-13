@@ -63,15 +63,12 @@ namespace webAPI.NET.Controllers
             identificador.Ativo = veiculo.Ativo;
         }
 
-        [HttpGet]
-        [Route("api/veiculos/excluir/{id}")]
-        // EXCLUIR api/veiculos/5
-        public JObject Excluir(int id)
+        
+        // DELETE api/veiculos/5
+        public void Delete(int id)
         {
-            var veiculo = listaVeiculos.Single(x => x.Id.Equals(id));
-            listaVeiculos.Remove(veiculo);
-            var resultado = JObject.Parse("{resultado: \"ok\" }");
-            return (JObject)"resultado";
+            var identificador = listaVeiculos.FindIndex(x => x.Id.Equals(id));
+            listaVeiculos.RemoveAt(identificador);
         }
     }
 }
